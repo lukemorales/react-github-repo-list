@@ -1,16 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import {} from './RepositoryStyles.js';
 
-export default class Repository extends Component {
-  state = {
-    newState: null,
-  };
-
-  render() {
-    return (
-      <>
-        <h1>Repository Component</h1>
-      </>
-    );
-  }
+export default function Repository({ match }) {
+  return (
+    <>
+      <h1>Repository: {decodeURIComponent(match.params.repo)}</h1>
+    </>
+  );
 }
