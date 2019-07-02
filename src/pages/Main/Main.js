@@ -1,9 +1,9 @@
 import React from 'react';
-// import {} from './MainStyles.js';
+import { Title } from './MainStyles';
 
 const Main = () => (
   <>
-    <h1>Main Component</h1>
+    <Title>Main Component</Title>
   </>
 );
 

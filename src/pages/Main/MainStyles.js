@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-export const $ = styled.`
-	
+export const Title = styled.h1`
+  color: #fff;
 `;
-
