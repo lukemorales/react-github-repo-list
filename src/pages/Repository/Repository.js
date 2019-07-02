@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import api from '../../services/api';
 // import {} from './RepositoryStyles.js';
 
 export default class Repository extends Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: Proptypes.shape({
+        repo: PropTypes.string,
+      }),
+    }).isRequired,
+  };
+
   state = {
     repo: {},
     issues: [],
