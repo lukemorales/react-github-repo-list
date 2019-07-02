@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 import api from '../../services/api';
 
-import { Container, Form, SubmitButton, List } from './MainStyles';
+import { Form, SubmitButton, List } from './MainStyles';
+import Container from '../../components/Container';
 
 class Main extends Component {
   state = {
