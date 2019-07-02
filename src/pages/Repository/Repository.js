@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { userInfo } from 'os';
 import api from '../../services/api';
-import { Loading, Owner } from './RepositoryStyles';
+import { Loading, Owner, IssueList } from './RepositoryStyles';
 import Container from '../../components/Container';
 
 export default class Repository extends Component {
@@ -57,6 +58,25 @@ export default class Repository extends Component {
           <h1>{repo.name}</h1>
           <p>{repo.description}</p>
         </Owner>
+
+        <IssueList>
+          {issues.map(issue => (
+            <li key={String(issue.id)}>
+              <img src={issue.user.avatar_url} alt={issue.user.login} />
+              <div>
+                <strong>
+                  <a href={issue.html_url} target="_blank">
+                    {issue.title}
+                  </a>
+                  {issue.labels.map(label => (
+                    <span key={String(label.id)}> {label.name} </span>
+                  ))}
+                </strong>
+                <p> {issue.user.login} </p>
+              </div>
+            </li>
+          ))}
+        </IssueList>
       </Container>
     );
   }
