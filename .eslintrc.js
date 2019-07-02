@@ -37,6 +37,7 @@ module.exports = {
         devDependencies: true,
         packageDir: [context.getFilename(), __dirname]
       }
-    ]
+    ],
+    "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }]
   },
 };
