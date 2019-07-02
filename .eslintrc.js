@@ -30,6 +30,13 @@ module.exports = {
       'warn',
       {extensions: ['.jsx', '.js']}
     ],
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': context => [
+      'error',
+      {
+        devDependencies: true,
+        packageDir: [context.getFilename(), __dirname]
+      }
+    ]
   },
 };
