@@ -1,0 +1,2 @@
+# react-github-repo-list
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/567b17dcb27643bf9ed46a96673450a8)](https://app.codacy.com/app/lukemorales/react-github-repo-list?utm_source=github.com&utm_medium=referral&utm_content=lukemorales/react-github-repo-list&utm_campaign=Badge_Grade_Settings)
