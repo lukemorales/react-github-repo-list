@@ -26,13 +26,12 @@
   </a>
   
   <img alt="GitHub" src="https://img.shields.io/github/license/lukemorales/react-github-repo-list.svg"> 
-  
 </p>
 
 <p align="center">
-  <a href="#technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#license">License</a>
+  <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>
 </p>
 
 ## :rocket: Technologies
@@ -40,13 +39,9 @@
 This project was developed at the [RocketSeat GoStack Bootcamp](https://rocketseat.com.br/bootcamp) with the following technologies:
 
 -  [ReactJS](https://reactjs.org/)
-
 -  [React Router v4](https://github.com/ReactTraining/react-router)
-
 -  [styled-components](https://www.styled-components.com/)
-
 -  [GitHub REST API v3](https://developer.github.com/v3/)
-
 -  [VS Code][vc] with [EditorConfig][vceditconfig] and [ESLint][vceslint]
   
 ## :information_source: How To Use
