@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { userInfo } from 'os';
 import api from '../../services/api';
 import { Loading, Owner, IssueList } from './RepositoryStyles';
 import Container from '../../components/Container';
@@ -65,7 +64,11 @@ export default class Repository extends Component {
               <img src={issue.user.avatar_url} alt={issue.user.login} />
               <div>
                 <strong>
-                  <a href={issue.html_url} target="_blank">
+                  <a
+                    href={issue.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {issue.title}
                   </a>
                   {issue.labels.map(label => (
