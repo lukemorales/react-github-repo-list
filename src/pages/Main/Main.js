@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 import api from '../../services/api';
 
-import { Form, SubmitButton, List } from './MainStyles';
+import { Form, SubmitButton, List, ErrorMessage } from './MainStyles';
 import Container from '../../components/Container';
 
 class Main extends Component {
@@ -11,6 +11,8 @@ class Main extends Component {
     newRepo: '',
     repositories: [],
     loading: false,
+    error: false,
+    errorMessage: '',
   };
 
   componentDidMount() {
@@ -33,25 +35,43 @@ class Main extends Component {
   handleSubmit = async e => {
     e.preventDefault();
 
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: false });
 
-    const { newRepo, repositories } = this.state;
+    try {
+      const { newRepo, repositories } = this.state;
 
-    const response = await api.get(`/repos/${newRepo}`);
+      if (newRepo === '') throw new Error('You need to inform one repository');
 
-    const data = {
-      name: response.data.full_name,
-    };
+      const hasRepo = repositories.find(repo => repo.name === newRepo);
 
-    this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',
-      loading: false,
-    });
+      if (hasRepo) throw new Error('Duplicated Repository');
+
+      const response = await api.get(`/repos/${newRepo}`);
+
+      const data = {
+        name: response.data.full_name,
+      };
+
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',
+        errorMessage: '',
+      });
+    } catch (Error) {
+      this.setState({
+        error: true,
+        errorMessage:
+          Error.message === 'Request failed with status code 404'
+            ? 'Repository not found'
+            : Error.message,
+      });
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   render() {
-    const { newRepo, loading, repositories } = this.state;
+    const { newRepo, loading, repositories, error, errorMessage } = this.state;
 
     return (
       <Container>
@@ -60,7 +80,7 @@ class Main extends Component {
           Repositories
         </h1>
 
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} error={error ? 1 : 0}>
           <input
             type="text"
             placeholder="Add Repository"
@@ -75,6 +95,8 @@ class Main extends Component {
             )}
           </SubmitButton>
         </Form>
+
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
         <List>
           {repositories.map(repo => (
