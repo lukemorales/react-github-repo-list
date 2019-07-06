@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import api from '../../services/api';
-import { Loading, Owner, IssueList } from './RepositoryStyles';
+import { Loading, Owner, IssueList, FilterList } from './RepositoryStyles';
 import Container from '../../components/Container';
 
 export default class Repository extends Component {
@@ -18,10 +18,17 @@ export default class Repository extends Component {
     repo: {},
     issues: [],
     loading: true,
+    filters: [
+      { state: 'all', label: 'All Issues', active: true },
+      { state: 'open', label: 'Open', active: false },
+      { state: 'closed', label: 'Closed', active: false },
+    ],
+    filterIndex: 0,
   };
 
   async componentDidMount() {
     const { match } = this.props;
+    const { filters } = this.state;
 
     const repoName = decodeURIComponent(match.params.repo);
 
@@ -29,7 +36,7 @@ export default class Repository extends Component {
       await api.get(`/repos/${repoName}`),
       await api.get(`/repos/${repoName}/issues`, {
         params: {
-          state: 'open',
+          state: filters.find(filter => filter.active).state,
           per_page: 5,
         },
       }),
@@ -42,8 +49,29 @@ export default class Repository extends Component {
     });
   }
 
+  loadFilters = async () => {
+    const { match } = this.props;
+    const { filters, filterIndex } = this.state;
+
+    const repoName = decodeURIComponent(match.params.repo);
+
+    const response = await api.get(`/repos/${repoName}/issues`, {
+      params: {
+        state: filters[filterIndex].state,
+        per_page: 5,
+      },
+    });
+
+    this.setState({ issues: response.data });
+  };
+
+  handleFilters = async filterIndex => {
+    await this.setState({ filterIndex });
+    this.loadFilters();
+  };
+
   render() {
-    const { repo, issues, loading } = this.state;
+    const { repo, issues, loading, filters, filterIndex } = this.state;
 
     if (loading) {
       return <Loading> Carregando </Loading>;
@@ -59,6 +87,17 @@ export default class Repository extends Component {
         </Owner>
 
         <IssueList>
+          <FilterList active={filterIndex}>
+            {filters.map((filter, index) => (
+              <button
+                type="button"
+                key={filter.state}
+                onClick={() => this.handleFilters(index)}
+              >
+                {filter.label}
+              </button>
+            ))}
+          </FilterList>
           {issues.map(issue => (
             <li key={String(issue.id)}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />

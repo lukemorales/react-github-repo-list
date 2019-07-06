@@ -47,6 +47,24 @@ export const Owner = styled.header`
   }
 `;
 
+export const FilterList = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+
+  button {
+    border-radius: 3px;
+    border: 0;
+    padding: 12px 20px;
+    margin: 0 0.5rem;
+
+    &:nth-child(${props => props.active + 1}) {
+      background: #7159c1;
+      color: white;
+    }
+  }
+`;
+
 export const IssueList = styled.ul`
   padding-top: 30px;
   margin-top: 30px;
@@ -91,6 +109,7 @@ export const IssueList = styled.ul`
         a {
           text-decoration: none;
           color: #333;
+          line-height: 21px;
 
           &:hover {
             color: #7159c1;
