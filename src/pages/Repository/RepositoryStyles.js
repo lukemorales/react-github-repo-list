@@ -62,6 +62,46 @@ export const FilterList = styled.div`
       background: #7159c1;
       color: white;
     }
+
+    &:hover {
+      background: #7159c1;
+      color: #fff;
+    }
+  }
+`;
+
+export const PageNav = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0 0;
+
+  button {
+    border-radius: 3px;
+    border: 0;
+    padding: 12px 20px;
+    margin: 0;
+
+    &:hover {
+      background: #7159c1;
+      color: #fff;
+    }
+
+    &[disabled] {
+      background: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.3);
+    }
+
+    svg {
+      vertical-align: middle;
+    }
+
+    &:nth-child(1) svg {
+      margin-right: 10px;
+    }
+
+    &:nth-child(2) svg {
+      margin-left: 10px;
+    }
   }
 `;
 

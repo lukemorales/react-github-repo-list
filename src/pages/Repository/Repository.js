@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import api from '../../services/api';
-import { Loading, Owner, IssueList, FilterList } from './RepositoryStyles';
+import {
+  Loading,
+  Owner,
+  IssueList,
+  FilterList,
+  PageNav,
+} from './RepositoryStyles';
 import Container from '../../components/Container';
 
 export default class Repository extends Component {
@@ -24,6 +31,7 @@ export default class Repository extends Component {
       { state: 'closed', label: 'Closed', active: false },
     ],
     filterIndex: 0,
+    page: 1,
   };
 
   async componentDidMount() {
@@ -37,7 +45,7 @@ export default class Repository extends Component {
       await api.get(`/repos/${repoName}/issues`, {
         params: {
           state: filters.find(filter => filter.active).state,
-          per_page: 5,
+          per_page: 4,
         },
       }),
     ]);
@@ -51,7 +59,7 @@ export default class Repository extends Component {
 
   loadFilters = async () => {
     const { match } = this.props;
-    const { filters, filterIndex } = this.state;
+    const { filters, filterIndex, page } = this.state;
 
     const repoName = decodeURIComponent(match.params.repo);
 
@@ -59,6 +67,7 @@ export default class Repository extends Component {
       params: {
         state: filters[filterIndex].state,
         per_page: 5,
+        page,
       },
     });
 
@@ -70,11 +79,17 @@ export default class Repository extends Component {
     this.loadFilters();
   };
 
+  handlePage = async action => {
+    const { page } = this.state;
+    await this.setState({ page: action === 'back' ? page - 1 : page + 1 });
+    this.loadFilters();
+  };
+
   render() {
-    const { repo, issues, loading, filters, filterIndex } = this.state;
+    const { repo, issues, loading, filters, filterIndex, page } = this.state;
 
     if (loading) {
-      return <Loading> Carregando </Loading>;
+      return <Loading> Loading </Loading>;
     }
 
     return (
@@ -118,6 +133,20 @@ export default class Repository extends Component {
               </div>
             </li>
           ))}
+          <PageNav>
+            <button
+              type="button"
+              disabled={page < 2}
+              onClick={() => this.handlePage('back')}
+            >
+              <FaArrowLeft />
+              Prev. Page
+            </button>
+            <button type="button" onClick={() => this.handlePage('next')}>
+              Next Page
+              <FaArrowRight />
+            </button>
+          </PageNav>
         </IssueList>
       </Container>
     );
