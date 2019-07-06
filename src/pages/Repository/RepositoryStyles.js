@@ -119,10 +119,13 @@ export const FilterList = styled.div`
 `;
 
 export const IssueList = styled.ul`
+  display: flex;
+  flex-direction: column;
   padding-top: 30px;
   margin-top: 30px;
   border-top: 1px solid #eee;
   list-style: none;
+  min-height: 540px;
 
   li {
     display: flex;
@@ -184,6 +187,7 @@ export const PageNav = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 15px 0 0;
+  margin-top: auto;
 
   button {
     border-radius: 3px;
@@ -199,6 +203,7 @@ export const PageNav = styled.div`
     &[disabled] {
       background: rgba(0, 0, 0, 0.1);
       color: rgba(0, 0, 0, 0.3);
+      cursor: auto;
     }
 
     svg {
