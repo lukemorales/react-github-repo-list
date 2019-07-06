@@ -100,10 +100,10 @@ class Main extends Component {
 
         <List>
           {repositories.map(repo => (
-            <li key="repo.name">
+            <li key={repo.name}>
               <span>{repo.name}</span>
               <Link to={`/repository/${encodeURIComponent(repo.name)}`}>
-                Detalhes
+                Details
               </Link>
             </li>
           ))}

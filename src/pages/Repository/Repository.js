@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import { FaStar, FaRegFileAlt } from 'react-icons/fa';
+import { GoRepoForked, GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import api from '../../services/api';
 import {
   Loading,
@@ -9,6 +10,9 @@ import {
   IssueList,
   FilterList,
   PageNav,
+  OwnerProfile,
+  RepoInfo,
+  IssueLabel,
 } from './RepositoryStyles';
 import Container from '../../components/Container';
 
@@ -50,6 +54,8 @@ export default class Repository extends Component {
       }),
     ]);
 
+    console.log(issues.data);
+
     this.setState({
       repo: repo.data,
       issues: issues.data,
@@ -66,7 +72,7 @@ export default class Repository extends Component {
     const response = await api.get(`/repos/${repoName}/issues`, {
       params: {
         state: filters[filterIndex].state,
-        per_page: 5,
+        per_page: 4,
         page,
       },
     });
@@ -95,10 +101,46 @@ export default class Repository extends Component {
     return (
       <Container>
         <Owner>
-          <Link to="/">Back to Repositories</Link>
-          <img src={repo.owner.avatar_url} alt={repo.owner.login} />
-          <h1>{repo.name}</h1>
-          <p>{repo.description}</p>
+          <Link to="/">
+            <GoArrowLeft /> Back to Repositories
+          </Link>
+          <OwnerProfile>
+            <a
+              href={repo.owner.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={repo.owner.avatar_url} alt={repo.owner.login} />
+            </a>
+            <h2>{repo.owner.login}</h2>
+          </OwnerProfile>
+          <RepoInfo>
+            <h1>
+              <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                {repo.name}
+              </a>
+            </h1>
+            <div>
+              {repo.license && (
+                <span>
+                  <FaRegFileAlt /> {repo.license.name}
+                </span>
+              )}
+              {repo.stargazers_count && (
+                <span>
+                  <FaStar />
+                  {`${Number(repo.stargazers_count).toLocaleString()} stars`}
+                </span>
+              )}
+              {repo.forks && (
+                <span>
+                  <GoRepoForked />
+                  {`${Number(repo.forks_count).toLocaleString()} forks`}
+                </span>
+              )}
+            </div>
+            <p>{repo.description}</p>
+          </RepoInfo>
         </Owner>
 
         <IssueList>
@@ -126,7 +168,9 @@ export default class Repository extends Component {
                     {issue.title}
                   </a>
                   {issue.labels.map(label => (
-                    <span key={String(label.id)}> {label.name} </span>
+                    <IssueLabel key={String(label.id)} color={label.color}>
+                      {label.name}
+                    </IssueLabel>
                   ))}
                 </strong>
                 <p> {issue.user.login} </p>
@@ -139,12 +183,12 @@ export default class Repository extends Component {
               disabled={page < 2}
               onClick={() => this.handlePage('back')}
             >
-              <FaArrowLeft />
+              <GoArrowLeft />
               Prev. Page
             </button>
             <button type="button" onClick={() => this.handlePage('next')}>
               Next Page
-              <FaArrowRight />
+              <GoArrowRight />
             </button>
           </PageNav>
         </IssueList>

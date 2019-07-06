@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colorContrast from '../../helpers/colorContrast';
 
 export const Loading = styled.div`
   color: #fff;
@@ -12,37 +13,83 @@ export const Loading = styled.div`
 
 export const Owner = styled.header`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
 
-  a {
+  & > a {
     color: #7159c1;
     font-size: 16px;
     text-decoration: none;
     align-self: flex-start;
+    flex: 1 1 100%;
+    margin-bottom: 40px;
 
     &:hover {
       text-decoration: underline;
     }
+
+    & svg {
+      vertical-align: top;
+      margin-right: 4px;
+    }
+  }
+`;
+
+export const OwnerProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 40px;
+  align-self: flex-start;
+
+  h2 {
+    font-size: 20px;
   }
 
   img {
-    width: 120px;
+    width: 80px;
     border-radius: 50%;
-    margin-top: 20px;
+    margin-bottom: 5px;
   }
+`;
 
+export const RepoInfo = styled.div`
+  align-self: flex-start;
   h1 {
     font-size: 24px;
-    margin-top: 10px;
+
+    & > a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        color: #7159c1;
+      }
+    }
+  }
+
+  & div {
+    margin: 8px 0 16px;
+
+    & span {
+      font-size: 12px;
+      background: #7564aa;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 3px;
+      margin-right: 8px;
+
+      & svg {
+        vertical-align: text-top;
+        margin-right: 2px;
+      }
+    }
   }
 
   p {
-    margin-top: 5px;
     font-size: 14px;
     color: #666;
     line-height: 1.4;
-    text-align: center;
     max-width: 400px;
   }
 `;
@@ -66,41 +113,6 @@ export const FilterList = styled.div`
     &:hover {
       background: #7159c1;
       color: #fff;
-    }
-  }
-`;
-
-export const PageNav = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 30px 0 0;
-
-  button {
-    border-radius: 3px;
-    border: 0;
-    padding: 12px 20px;
-    margin: 0;
-
-    &:hover {
-      background: #7159c1;
-      color: #fff;
-    }
-
-    &[disabled] {
-      background: rgba(0, 0, 0, 0.1);
-      color: rgba(0, 0, 0, 0.3);
-    }
-
-    svg {
-      vertical-align: middle;
-    }
-
-    &:nth-child(1) svg {
-      margin-right: 10px;
-    }
-
-    &:nth-child(2) svg {
-      margin-left: 10px;
     }
   }
 `;
@@ -135,17 +147,6 @@ export const IssueList = styled.ul`
       strong {
         font-size: 16px;
 
-        span {
-          background: #eee;
-          color: #333;
-          border-radius: 2px;
-          font-size: 12px;
-          font-weight: 600;
-          height: 20px;
-          padding: 3px 4px;
-          margin-left: 10px;
-        }
-
         a {
           text-decoration: none;
           color: #333;
@@ -163,6 +164,53 @@ export const IssueList = styled.ul`
         font-size: 12px;
         color: #999;
       }
+    }
+  }
+`;
+
+export const IssueLabel = styled.span`
+  background: ${props => `#${props.color}`};
+  color: ${({ color }) => colorContrast(color)}};
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  height: 20px;
+  padding: 3px 8px;
+  margin-left: 10px;
+`;
+
+export const PageNav = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0 0;
+
+  button {
+    border-radius: 3px;
+    border: 0;
+    padding: 12px 20px;
+    margin: 0;
+
+    &:hover {
+      background: #7159c1;
+      color: #fff;
+    }
+
+    &[disabled] {
+      background: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.3);
+    }
+
+    svg {
+      vertical-align: middle;
+      font-size: 20px;
+    }
+
+    &:nth-child(1) svg {
+      margin-right: 4px;
+    }
+
+    &:nth-child(2) svg {
+      margin-left: 4px;
     }
   }
 `;

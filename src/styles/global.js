@@ -18,7 +18,7 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    color: #232527;
+    color: #333333;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
   }
