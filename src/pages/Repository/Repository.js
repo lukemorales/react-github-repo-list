@@ -54,7 +54,7 @@ export default class Repository extends Component {
       }),
     ]);
 
-    console.log(issues.data);
+    console.log(repo.data);
 
     this.setState({
       repo: repo.data,
@@ -126,16 +126,20 @@ export default class Repository extends Component {
                   <FaRegFileAlt /> {repo.license.name}
                 </span>
               )}
-              {repo.stargazers_count && (
+              {repo.stargazers_count !== 0 && (
                 <span>
                   <FaStar />
-                  {`${Number(repo.stargazers_count).toLocaleString()} stars`}
+                  {`${Number(repo.stargazers_count).toLocaleString(undefined, {
+                    minimumIntegerDigits: 2,
+                  })} ${repo.stargazers_count === 1 ? 'star' : 'stars'}`}
                 </span>
               )}
-              {repo.forks && (
+              {repo.forks !== 0 && (
                 <span>
                   <GoRepoForked />
-                  {`${Number(repo.forks_count).toLocaleString()} forks`}
+                  {`${Number(repo.forks_count).toLocaleString()} ${
+                    repo.forks_count === 1 ? 'fork' : 'forks'
+                  }`}
                 </span>
               )}
             </div>

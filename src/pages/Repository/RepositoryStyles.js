@@ -14,6 +14,7 @@ export const Loading = styled.div`
 export const Owner = styled.header`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
 
   & > a {
@@ -81,7 +82,7 @@ export const RepoInfo = styled.div`
 
       & svg {
         vertical-align: text-top;
-        margin-right: 2px;
+        margin-right: 4px;
       }
     }
   }
