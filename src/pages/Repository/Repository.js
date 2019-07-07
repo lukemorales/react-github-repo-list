@@ -101,9 +101,11 @@ export default class Repository extends Component {
     return (
       <Container>
         <Owner>
-          <Link to="/">
-            <GoArrowLeft /> Back to Repositories
-          </Link>
+          <div>
+            <Link to="/">
+              <GoArrowLeft /> Back to Repositories
+            </Link>
+          </div>
           <OwnerProfile>
             <a
               href={repo.owner.html_url}

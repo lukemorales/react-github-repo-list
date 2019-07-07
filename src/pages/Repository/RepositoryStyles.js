@@ -17,21 +17,24 @@ export const Owner = styled.header`
   justify-content: center;
   flex-wrap: wrap;
 
-  & > a {
-    color: #7159c1;
-    font-size: 16px;
-    text-decoration: none;
+  div:first-child {
     align-self: flex-start;
     flex: 1 1 100%;
     margin-bottom: 40px;
 
-    &:hover {
-      text-decoration: underline;
-    }
+    & > a {
+      color: #7159c1;
+      font-size: 16px;
+      text-decoration: none;
 
-    & svg {
-      vertical-align: top;
-      margin-right: 4px;
+      &:hover {
+        color: #907dcf;
+      }
+
+      & svg {
+        vertical-align: top;
+        margin-right: 4px;
+      }
     }
   }
 `;
@@ -48,8 +51,9 @@ export const OwnerProfile = styled.div`
   }
 
   img {
-    width: 80px;
+    width: 88px;
     border-radius: 50%;
+    border: 4px solid #e6e6e6;
     margin-bottom: 5px;
   }
 `;
@@ -97,23 +101,27 @@ export const RepoInfo = styled.div`
 
 export const FilterList = styled.div`
   display: flex;
-  justify-content: center;
-  padding-bottom: 30px;
+  justify-content: space-evenly;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eee;
 
   button {
-    border-radius: 3px;
     border: 0;
-    padding: 12px 20px;
+    padding: 16px 20px;
     margin: 0 0.5rem;
+    background: none;
+    color: #666;
+    border-bottom: 2px solid transparent;
+    text-transform: uppercase;
 
     &:nth-child(${props => props.active + 1}) {
-      background: #7159c1;
-      color: white;
+      font-weight: bold;
+      color: #7159c1;
+      border-bottom: 2px solid #7159c1;
     }
 
     &:hover {
-      background: #7159c1;
-      color: #fff;
+      color: #7159c1;
     }
   }
 `;
@@ -121,11 +129,10 @@ export const FilterList = styled.div`
 export const IssueList = styled.ul`
   display: flex;
   flex-direction: column;
-  padding-top: 30px;
   margin-top: 30px;
   border-top: 1px solid #eee;
   list-style: none;
-  min-height: 540px;
+  min-height: 520px;
 
   li {
     display: flex;
@@ -155,6 +162,7 @@ export const IssueList = styled.ul`
           text-decoration: none;
           color: #333;
           line-height: 21px;
+          margin-right: 10px;
 
           &:hover {
             color: #7159c1;
@@ -173,14 +181,15 @@ export const IssueList = styled.ul`
 `;
 
 export const IssueLabel = styled.span`
-  background: ${props => `#${props.color}`};
-  color: ${({ color }) => colorContrast(color)}};
+  background: ${({ color }) => `#${color}`};
+  color: ${({ color }) => colorContrast(color)};
+  display: inline-block;
   border-radius: 2px;
   font-size: 12px;
   font-weight: 600;
   height: 20px;
   padding: 3px 8px;
-  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 export const PageNav = styled.div`
