@@ -18,13 +18,13 @@ export const Loading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 727px;
+  height: 731px;
 
   ${props =>
     props.loading &&
     css`
       svg {
-        font-size: 48px;
+        font-size: 40px;
         animation: ${rotate} 2s linear infinite;
         color: #7159c1 !important;
       }
@@ -66,6 +66,10 @@ export const OwnerProfile = styled.div`
   margin-right: 40px;
   align-self: flex-start;
 
+  @media (max-width: 600px) {
+    margin: 0 0 5px 0;
+  }
+
   h2 {
     font-size: 20px;
   }
@@ -80,6 +84,11 @@ export const OwnerProfile = styled.div`
 
 export const RepoInfo = styled.div`
   align-self: flex-start;
+
+  @media (max-width: 600px) {
+    text-align: center;
+  }
+
   h1 {
     font-size: 24px;
 
@@ -152,16 +161,29 @@ export const IssueList = styled.ul`
   margin-top: 30px;
   border-top: 1px solid #eee;
   list-style: none;
-  min-height: 520px;
+  min-height: 524px;
 
   li {
-    display: flex;
-    padding: 15px 10px;
-    border: 1px solid #eee;
-    border-radius: 4px;
-
     & + li {
       margin-top: 10px;
+    }
+
+    a {
+      padding: 15px 10px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #333;
+      line-height: 21px;
+      display: flex;
+      transition: all 180ms ease-in-out;
+
+      &:hover {
+        color: #7159c1;
+        border-color: #ddd;
+        transform: scale(1.005);
+        box-shadow: 0 12px 10px -10px hsla(254, 26%, 25%, 0.27);
+      }
     }
 
     img {
@@ -178,16 +200,8 @@ export const IssueList = styled.ul`
       strong {
         font-size: 16px;
 
-        a {
-          text-decoration: none;
-          color: #333;
-          line-height: 21px;
+        & span:first-child {
           margin-right: 10px;
-
-          &:hover {
-            color: #7159c1;
-            text-decoration: none;
-          }
         }
       }
 
@@ -210,6 +224,7 @@ export const IssueLabel = styled.span`
   height: 20px;
   padding: 3px 8px;
   margin-right: 10px;
+  line-height: 12px;
 `;
 
 export const PageNav = styled.div`

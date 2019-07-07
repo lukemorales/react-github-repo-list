@@ -173,24 +173,24 @@ export default class Repository extends Component {
           </FilterList>
           {issues.map(issue => (
             <li key={String(issue.id)}>
-              <img src={issue.user.avatar_url} alt={issue.user.login} />
-              <div>
-                <strong>
-                  <a
-                    href={issue.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {issue.title}
-                  </a>
-                  {issue.labels.map(label => (
-                    <IssueLabel key={String(label.id)} color={label.color}>
-                      {label.name}
-                    </IssueLabel>
-                  ))}
-                </strong>
-                <p> {issue.user.login} </p>
-              </div>
+              <a
+                href={issue.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={issue.user.avatar_url} alt={issue.user.login} />
+                <div>
+                  <strong>
+                    <span>{issue.title}</span>
+                    {issue.labels.map(label => (
+                      <IssueLabel key={String(label.id)} color={label.color}>
+                        {label.name}
+                      </IssueLabel>
+                    ))}
+                  </strong>
+                  <p> {issue.user.login} </p>
+                </div>
+              </a>
             </li>
           ))}
           <PageNav>

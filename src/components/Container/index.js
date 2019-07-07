@@ -14,6 +14,11 @@ const Container = styled.div`
     text-align: center;
     color: #534974;
   }
+
+  @media (max-width: 600px) {
+    margin-top: 0;
+    border-radius: 0;
+  }
 `;
 
 export const Icon = styled.h2`
