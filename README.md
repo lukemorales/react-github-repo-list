@@ -35,6 +35,11 @@
 </p>
 
 ![App Screenshot](https://res.cloudinary.com/lukemorales/image/upload/v1562471845/readme_logos/github-repo-react-screenshot_n8yg2f.jpg)
+<p align="center">
+  <a href="https://react-github-repo-list.herokuapp.com/" target="_blank">
+    <img alt="Demo on Heroku" src="https://res.cloudinary.com/lukemorales/image/upload/v1562478330/readme_logos/demo_on_heroku_avr2tc.png">
+  </a>
+</p>
 
 ## :rocket: Technologies
 
