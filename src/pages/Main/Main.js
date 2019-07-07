@@ -9,7 +9,15 @@ import Container, { Icon } from '../../components/Container';
 class Main extends Component {
   state = {
     newRepo: '',
-    repositories: [],
+    repositories: [
+      {
+        name: 'facebook/react',
+        owner: {
+          name: 'facebook',
+          avatar_url: 'https://avatars3.githubusercontent.com/u/69631?v=4',
+        },
+      },
+    ],
     loading: false,
     error: false,
     errorMessage: '',
@@ -48,10 +56,13 @@ class Main extends Component {
 
       const response = await api.get(`/repos/${newRepo}`);
 
-      // const data = {
-      //   name: response.data.full_name,
-      // };
-      const { data } = response;
+      const data = {
+        name: response.data.full_name,
+        owner: {
+          name: response.data.owner.login,
+          avatar_url: response.data.owner.avatar_url,
+        },
+      };
 
       this.setState({
         repositories: [...repositories, data],
@@ -69,6 +80,15 @@ class Main extends Component {
     } finally {
       this.setState({ loading: false });
     }
+  };
+
+  handleDelete = repo => {
+    const { repositories } = this.state;
+    this.setState({
+      repositories: repositories.filter(
+        repository => repository.name !== repo.name
+      ),
+    });
   };
 
   render() {
@@ -104,12 +124,12 @@ class Main extends Component {
           {repositories.map(repo => (
             <li key={repo.name}>
               <div>
-                <Link to={`/repository/${encodeURIComponent(repo.full_name)}`}>
+                <Link to={`/repository/${encodeURIComponent(repo.name)}`}>
                   <img src={repo.owner.avatar_url} alt={repo.owner.name} />
-                  <span>{repo.full_name}</span>
+                  <span>{repo.name}</span>
                 </Link>
               </div>
-              <button type="button" onClick={() => {}}>
+              <button type="button" onClick={() => this.handleDelete(repo)}>
                 <FaTrash />
               </button>
             </li>
