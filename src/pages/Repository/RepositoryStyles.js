@@ -1,14 +1,34 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import colorContrast from '../../helpers/colorContrast';
 
+const rotate = keyframes`
+from {
+  transform: rotate(0deg)
+}
+
+to {
+  transform: rotate(360deg)
+}
+`;
+
 export const Loading = styled.div`
-  color: #fff;
+  background: #fff;
   font-size: 30px;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 727px;
+
+  ${props =>
+    props.loading &&
+    css`
+      svg {
+        font-size: 48px;
+        animation: ${rotate} 2s linear infinite;
+        color: #7159c1 !important;
+      }
+    `}
 `;
 
 export const Owner = styled.header`

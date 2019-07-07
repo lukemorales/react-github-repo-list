@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
+import { FaGithubAlt, FaPlus, FaSpinner, FaTrash } from 'react-icons/fa';
 import api from '../../services/api';
 
 import { Form, SubmitButton, List, ErrorMessage } from './MainStyles';
-import Container from '../../components/Container';
+import Container, { Icon } from '../../components/Container';
 
 class Main extends Component {
   state = {
@@ -48,9 +48,10 @@ class Main extends Component {
 
       const response = await api.get(`/repos/${newRepo}`);
 
-      const data = {
-        name: response.data.full_name,
-      };
+      // const data = {
+      //   name: response.data.full_name,
+      // };
+      const { data } = response;
 
       this.setState({
         repositories: [...repositories, data],
@@ -75,10 +76,11 @@ class Main extends Component {
 
     return (
       <Container>
-        <h1>
+        <Icon>
           <FaGithubAlt />
-          Repositories
-        </h1>
+        </Icon>
+
+        <h1>GitHub Repositories</h1>
 
         <Form onSubmit={this.handleSubmit} error={error ? 1 : 0}>
           <input
@@ -87,7 +89,7 @@ class Main extends Component {
             value={newRepo}
             onChange={this.handleInputChange}
           />
-          <SubmitButton loading={loading ? 1 : 0}>
+          <SubmitButton loading={loading ? 1 : 0} empty={!newRepo}>
             {loading ? (
               <FaSpinner color="#fff" size={14} />
             ) : (
@@ -101,10 +103,15 @@ class Main extends Component {
         <List>
           {repositories.map(repo => (
             <li key={repo.name}>
-              <span>{repo.name}</span>
-              <Link to={`/repository/${encodeURIComponent(repo.name)}`}>
-                Details
-              </Link>
+              <div>
+                <Link to={`/repository/${encodeURIComponent(repo.full_name)}`}>
+                  <img src={repo.owner.avatar_url} alt={repo.owner.name} />
+                  <span>{repo.full_name}</span>
+                </Link>
+              </div>
+              <button type="button" onClick={() => {}}>
+                <FaTrash />
+              </button>
             </li>
           ))}
         </List>

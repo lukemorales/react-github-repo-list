@@ -7,17 +7,30 @@ const Container = styled.div`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
   margin: 80px auto;
+  position: relative;
 
-  h1 {
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-
-    svg {
-      margin-right: 10px;
-    }
+  & > h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #534974;
   }
+`;
+
+export const Icon = styled.h2`
+  position: absolute;
+  left: 50%;
+  bottom: -40px;
+  transform: translateX(-50%);
+  background: white;
+  color: #7159c1;
+  width: 80px;
+  height: 80px;
+  font-size: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 12px 10px -4px rgba(25, 10, 74, 0.23);
 `;
 
 export default Container;

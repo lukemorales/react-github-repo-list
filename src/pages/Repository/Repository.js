@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { FaStar, FaRegFileAlt } from 'react-icons/fa';
+import { FaStar, FaRegFileAlt, FaGithubAlt, FaSpinner } from 'react-icons/fa';
 import { GoRepoForked, GoArrowLeft, GoArrowRight } from 'react-icons/go';
 import api from '../../services/api';
 import {
@@ -14,7 +14,7 @@ import {
   RepoInfo,
   IssueLabel,
 } from './RepositoryStyles';
-import Container from '../../components/Container';
+import Container, { Icon } from '../../components/Container';
 
 export default class Repository extends Component {
   static propTypes = {
@@ -53,8 +53,6 @@ export default class Repository extends Component {
         },
       }),
     ]);
-
-    console.log(repo.data);
 
     this.setState({
       repo: repo.data,
@@ -95,11 +93,23 @@ export default class Repository extends Component {
     const { repo, issues, loading, filters, filterIndex, page } = this.state;
 
     if (loading) {
-      return <Loading> Loading </Loading>;
+      return (
+        <Container>
+          <Icon>
+            <FaGithubAlt />
+          </Icon>
+          <Loading loading={loading ? 1 : 0}>
+            <FaSpinner />
+          </Loading>
+        </Container>
+      );
     }
 
     return (
       <Container>
+        <Icon>
+          <FaGithubAlt />
+        </Icon>
         <Owner>
           <div>
             <Link to="/">
