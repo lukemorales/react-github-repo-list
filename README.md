@@ -34,6 +34,8 @@
   <a href="#memo-license">License</a>
 </p>
 
+![App Screenshot](https://res.cloudinary.com/lukemorales/image/upload/v1562471845/readme_logos/github-repo-react-screenshot_n8yg2f.jpg)
+
 ## :rocket: Technologies
 
 This project was developed at the [RocketSeat GoStack Bootcamp](https://rocketseat.com.br/bootcamp) with the following technologies:
