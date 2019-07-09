@@ -50,7 +50,9 @@ class Main extends Component {
 
       if (newRepo === '') throw new Error('You need to inform one repository');
 
-      const hasRepo = repositories.find(repo => repo.name === newRepo);
+      const hasRepo = repositories.find(
+        repo => repo.name.toLowerCase() === newRepo.toLowerCase()
+      );
 
       if (hasRepo) throw new Error('Duplicated Repository');
 
