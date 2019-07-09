@@ -50,12 +50,6 @@ class Main extends Component {
 
       if (newRepo === '') throw new Error('You need to inform one repository');
 
-      const hasRepo = repositories.find(
-        repo => repo.name.toLowerCase() === newRepo.toLowerCase()
-      );
-
-      if (hasRepo) throw new Error('Duplicated Repository');
-
       const response = await api.get(`/repos/${newRepo}`);
 
       const data = {
@@ -65,6 +59,12 @@ class Main extends Component {
           avatar_url: response.data.owner.avatar_url,
         },
       };
+
+      const hasRepo = repositories.find(
+        repo => repo.name.toLowerCase() === data.name.toLowerCase()
+      );
+
+      if (hasRepo) throw new Error('Duplicated Repository');
 
       this.setState({
         repositories: [...repositories, data],
